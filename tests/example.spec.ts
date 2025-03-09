@@ -21,6 +21,38 @@ test("get started link", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("conn to db", async ({ page }) => {
-  connectToDB();
+test("Viable One test", async ({ page }) => {
+  //connectToDB();
+  await page.goto("https://v1-web-git-test-viableone.vercel.app/");
+
+  let contactUsButton = page.locator(
+    "xpath=//div[@class='d-none d-lg-flex text-white navbar-nav nav-pills']//button"
+  );
+  await contactUsButton.click();
+  await page.getByRole("dialog").waitFor();
+  let contactUsDialog = page.locator(
+    "xpath=//div[@class='modal-content bg-dark pt-5 px-5']"
+  );
+  await contactUsDialog.locator("//input[@name='name']").fill("Test input");
+  await contactUsDialog
+    .locator("//input[@name='email']")
+    .fill("something@email.com");
+  await contactUsDialog.locator("//input[@name='phone']").fill("+420788666111");
+  await contactUsDialog
+    .locator("//input[@name='firmName']")
+    .fill("Some Random Company s.r.o");
+  await contactUsDialog
+    .locator("//textarea[@name='message']")
+    .fill("Some random opportunity for your company");
+  await contactUsDialog
+    .getByRole("button")
+    .filter({ hasText: "Odeslat" })
+    .click();
+
+  let personalData = await contactUsDialog.locator(
+    "//p[@class='invalid-feedback m-0 fs-7']"
+  );
+  expect(personalData).toBeVisible();
+
+  await page.waitForTimeout(5000);
 });
