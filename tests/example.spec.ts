@@ -28,4 +28,5 @@ test("Fill form click on personal data agreement", async ({ page }) => {
   await formPageObject.fillContactForm(testValues);
   await formPageObject.checkCheckBoxPersonalDataAgreement();
   await formPageObject.sendForm();
+  await formPageObject.thanksForFillingForm();
 });

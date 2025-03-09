@@ -46,7 +46,9 @@ export class FormPageObject {
     this.sendButton = this.contactUsDialogLocator
       .getByRole("button")
       .filter({ hasText: "Odeslat" });
-    this.thanksForFillingDialog = this.contactUsDialogLocator.locator("//p[@class='m-0 text-center text-uppercase fs-2 fw-bold']")
+    this.thanksForFillingDialog = this.contactUsDialogLocator.locator(
+      "//p[@class='m-0 text-center text-uppercase fs-2 fw-bold']"
+    );
   }
 
   async openPage() {
@@ -77,8 +79,8 @@ export class FormPageObject {
     await this.sendButton.click();
   }
 
-  async thanksForFillingForm(){
-    await this.page.
+  async thanksForFillingForm() {
+    //await this.page.
   }
 
   async checkAlertWhenCheckBoxPersonalDataNotChecked(expectedErrorMessage) {
